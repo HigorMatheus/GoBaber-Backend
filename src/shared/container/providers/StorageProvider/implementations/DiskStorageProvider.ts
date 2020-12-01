@@ -3,7 +3,7 @@ import path from 'path';
 import uploudConfig from '@config/upload';
 import IStorageProvider from '../models/IStorageprovader';
 
-class DiscStorageProvider implements IStorageProvider {
+class DiskStorageProvider implements IStorageProvider {
   public async saveFile(file: string): Promise<string> {
     await fs.promises.rename(
       path.resolve(uploudConfig.tempFolder, file),
@@ -25,4 +25,4 @@ class DiscStorageProvider implements IStorageProvider {
   }
 }
 
-export default DiscStorageProvider;
+export default DiskStorageProvider;

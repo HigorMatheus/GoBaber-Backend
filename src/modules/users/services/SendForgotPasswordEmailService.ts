@@ -35,7 +35,7 @@ class SendForgotPasswordEmailService {
         name: user.email,
       },
       subject: '[GoBarber ] Recuperação desenha',
-      templateDate: {
+      templateData: {
         template: 'ola, {{name}}: {{token}}',
         variables: {
           name: user.name,
