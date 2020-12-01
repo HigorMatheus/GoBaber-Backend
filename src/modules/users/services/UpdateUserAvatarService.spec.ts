@@ -4,14 +4,19 @@ import FakeUsersRepository from '../repositories/fakes/fakeUsersRepository';
 
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 
+let fakeUsersRepository: FakeUsersRepository;
+let fakeStorageProvider: FakeStorageProvider;
+let updateUserAvatar: UpdateUserAvatarService;
 describe('UpdateUserAvatar', () => {
-  it('should de able to create a new User', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-    const updateUserAvatar = new UpdateUserAvatarService(
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeStorageProvider = new FakeStorageProvider();
+    updateUserAvatar = new UpdateUserAvatarService(
       fakeUsersRepository,
       fakeStorageProvider,
     );
+  });
+  it('should de able to create a new User', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Due',
       email: 'jondue@exemple.com',
@@ -27,14 +32,6 @@ describe('UpdateUserAvatar', () => {
   });
 
   it('should not de able to update avatar from now exists user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
-    const updateUserAvatar = new UpdateUserAvatarService(
-      fakeUsersRepository,
-      fakeStorageProvider,
-    );
-
     await expect(
       updateUserAvatar.execute({
         user_id: 'non-exist-user',
@@ -44,14 +41,8 @@ describe('UpdateUserAvatar', () => {
   });
 
   it('should delect ald avatar when new one ', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
     const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile');
-    const updateUserAvatar = new UpdateUserAvatarService(
-      fakeUsersRepository,
-      fakeStorageProvider,
-    );
+
     const user = await fakeUsersRepository.create({
       name: 'John Due',
       email: 'jondue@exemple.com',

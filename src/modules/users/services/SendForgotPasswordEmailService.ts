@@ -1,6 +1,7 @@
 import AppError from '@shared/errors/AppError';
 import { injectable, inject } from 'tsyringe';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
+import path from 'path';
 import IUserRepository from '../repositories/IUsersRepository';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
 
@@ -29,6 +30,13 @@ class SendForgotPasswordEmailService {
 
     const { token } = await this.userTokensRepository.generate(user.id);
 
+    const forgoutPasswordTemplate = path.resolve(
+      __dirname,
+      '..',
+      'views',
+      'forgout_password.hbs',
+    );
+
     await this.mailProvider.sendMail({
       to: {
         name: user.name,
@@ -36,10 +44,10 @@ class SendForgotPasswordEmailService {
       },
       subject: '[GoBarber ] Recuperação desenha',
       templateData: {
-        template: 'ola, {{name}}: {{token}}',
+        file: forgoutPasswordTemplate,
         variables: {
           name: user.name,
-          token,
+          link: `http://localhost:3000/reset_password?token=${token}`,
         },
       },
     });
