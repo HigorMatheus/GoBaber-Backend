@@ -31,8 +31,8 @@ export default class EtherealMailProvider implements IMailProvider {
   public async sendMail({
     to,
     from,
-    templateData,
     subject,
+    templateData,
   }: ISendMailDTO): Promise<void> {
     const message = await this.client.sendMail({
       from: {
