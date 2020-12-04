@@ -1,13 +1,19 @@
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository';
 import AppError from '@shared/errors/AppError';
 import FakeAppointmentRepository from '../repositories/fakes/FakeAppointmentRepository';
 import CreateAppointmentService from './CreateAppointmentService';
 
 let fakeAppointmentRepository: FakeAppointmentRepository;
 let createAppointment: CreateAppointmentService;
+let fakeNotificationsRepository: FakeNotificationsRepository;
 describe('CreateAppointment', () => {
   beforeEach(() => {
     fakeAppointmentRepository = new FakeAppointmentRepository();
-    createAppointment = new CreateAppointmentService(fakeAppointmentRepository);
+    fakeNotificationsRepository = new FakeNotificationsRepository();
+    createAppointment = new CreateAppointmentService(
+      fakeAppointmentRepository,
+      fakeNotificationsRepository,
+    );
   });
   it('should de able to create a new appointment', async () => {
     jest.spyOn(Date, 'now').mockImplementationOnce(() => {
@@ -80,6 +86,7 @@ describe('CreateAppointment', () => {
         user_id: '102030',
       }),
     ).rejects.toBeInstanceOf(AppError);
+
     await expect(
       createAppointment.execute({
         date: new Date(2020, 4, 11, 18),
