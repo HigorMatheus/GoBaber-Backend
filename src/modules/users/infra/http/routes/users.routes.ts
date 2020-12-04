@@ -8,7 +8,7 @@ import UsersController from '../controllers/usersController';
 import UserAvatarController from '../controllers/UserAvatarController';
 
 const usersRouter = Router();
-const upload = multer(uploudComfig);
+const upload = multer(uploudComfig.multer);
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
 

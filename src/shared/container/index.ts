@@ -12,7 +12,7 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
-import INotificationRepository from '@modules/notifications/repositories/INotificationRepository';
+import INotificationRepository from '@modules/notifications/repositories/INotificationsRepository';
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationRepository';
 
 container.registerSingleton<IAppointsRepository>(

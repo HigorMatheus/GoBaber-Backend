@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import uploudConfig from '@config/upload';
-import IStorageProvider from '../models/IStorageprovader';
+import IStorageProvider from '../models/IStorageProvider';
 
 class DiskStorageProvider implements IStorageProvider {
   public async saveFile(file: string): Promise<string> {
     await fs.promises.rename(
-      path.resolve(uploudConfig.tempFolder, file),
+      path.resolve(uploudConfig.tmpFolder, file),
       path.resolve(uploudConfig.uploadsFolder, file),
     );
 
