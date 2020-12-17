@@ -14,10 +14,10 @@ import reteLimiter from './middlewares/reteLimiter';
 
 const app = express();
 
-app.use(reteLimiter);
 app.use(cros());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
+app.use(reteLimiter);
 app.use(routes);
 
 app.use(errors());
