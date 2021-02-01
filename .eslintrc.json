@@ -32,8 +32,9 @@
       "@typescript-eslint/no-unused-vars":[ "error",{
         "argsIgnorePattern":"_"
       }],
+      "@typescript-eslint/camelcase": "off",
       "eslintno-useless-constructor": "off",
-      // "@typescript-eslint/interface-name-prefix)":["error", {"prefixWithI": "prefixWithI"}],
+       "@typescript-eslint/interface-name-prefix)":["error", {"prefixWithI": "airbnb-base"}],
       
       "import/extensions": [
 	      "error",
